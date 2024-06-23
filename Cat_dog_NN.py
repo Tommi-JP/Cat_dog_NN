@@ -8,7 +8,7 @@ def main():
     batch_size = 32
     img_shape = 224
     # epochs
-    epochs = 1
+    epochs = 2
     # save outputfile
     file_path_output = "output.txt"
 
@@ -45,6 +45,7 @@ def main():
         fill_mode='nearest' # determines how newly created pixels are filled in when the image is transformed. 'nearest' means that the nearest pixel value will be used to fill in the gaps.
     )
 
+    # training data generator
     train_data_gen = image_gen_train.flow_from_directory(batch_size=batch_size,
                                                          directory=train_dir,
                                                          shuffle=True,
@@ -66,7 +67,8 @@ def main():
 
     print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
 
-    u_input = input("Everything looks good? Y/N")
+    # last cherckout before training
+    u_input = input("Everything looks good? (Y/N)")
     if u_input in ["Y", "y", "Yes", "yes"]:
         print("Training started!")
     elif u_input in ["N", "n", "No", "no"]:
@@ -85,6 +87,7 @@ def main():
       
     statistic(history, epochs, file_path_output)
 
+    save_model(model) 
 
 if __name__ == "__main__":
     main()

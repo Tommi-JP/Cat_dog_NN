@@ -78,6 +78,23 @@ def model_compiler_summary():
 
 
 def statistic(history, epochs, file_path_output):
+    """
+    Outputs the training accuracy and loss for each epoch to a specified file.
+
+    Parameters:
+    history (History): A Keras History object obtained from the training of a model. 
+                       This object contains the accuracy and loss metrics for both 
+                       training and validation datasets across all epochs.
+    
+    epochs (int): The number of epochs the model was trained for.
+    
+    file_path_output (str): The file path where the epoch-wise accuracy and loss 
+                            details will be saved.
+
+    Writes:
+    A text file at the specified file path containing the epoch number, 
+    training accuracy, and training loss for each epoch.
+    """
     acc = history.history['accuracy']
     val_acc = history.history['val_accuracy']
 
@@ -90,6 +107,19 @@ def statistic(history, epochs, file_path_output):
     with open(file_path_output, "w") as f:
         sys.stdout = f 
         for epoch in epochs_range:
-            print(f"Epoch: {epoch+1}: Accuracy: {acc[epoch]}, Loss: {loss[epoch]}")
+            print(f"Epoch: {epoch+1}: Accuracy: {acc[epoch]} "
+                    f"Loss: {loss[epoch]} "
+                    f"Validation accuracy: {val_acc[epoch]} "
+                    f"Validation loss: {val_loss[epoch]}")
+
     
     sys.stdout = original_stdout
+
+def save_model(model):
+    u_input = input("Do you want to save model? (Y/N)")
+    if u_input in ["Y", "y", "Yes", "yes"]:
+        model.save("./cat_dog.h5")
+    elif u_input in ["N", "n", "No", "no"]:
+        print("Model is not saved")
+    else:
+        print("Invalid input")
