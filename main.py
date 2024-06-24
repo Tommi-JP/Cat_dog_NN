@@ -2,7 +2,7 @@ from functions import *
 
 def main():
     # the directory where the pictures are
-    image_dir = "../Cat_Dog_data"
+    image_dir = "./Cat_Dog_data"
     # batch size and image shape variables
     batch_size = 32
     img_shape = 224

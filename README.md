@@ -1,49 +1,82 @@
-# Cat_dog_NN
-Neural network that recognizes images of cats and dogs
+### Project Title: Cat and Dog Image Classification
 
 This project aims to classify images of cats and dogs using a Convolutional Neural Network (CNN) built with TensorFlow and Keras. The model is trained on a dataset of cat and dog images, with data augmentation applied to enhance the training process.
 
-Installation
+#### Table of Contents
 
-## Clone the repository:
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Functions](#functions)
+- [License](#license)
 
-'''bash
-git clone https://github.com/yourusername/cat-dog-classification.git
-cd cat-dog-classification
+#### Installation
 
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/yourusername/cat-dog-classification.git
+    cd cat-dog-classification
+    ```
+2. Create a virtual environment and activate it:
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    ```
+3. Install the required packages:
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-## Create a virtual environment and activate it:
+4. Install Git LFS:
+    - macOS:
+      ```bash
+      brew install git-lfs
+      ```
+    - Windows: Lataa ja asenna [Git LFS for Windows](https://git-lfs.github.com/).
+    - Linux: Seuraa ohjeita [Git LFS:n dokumentaatiossa](https://github.com/git-lfs/git-lfs/wiki/Installation).
 
-bash'''
-python -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+5. Initialize Git LFS in your project:
+    ```bash
+    git lfs install
+    ```
 
+6. Track the `Cat_Dog_data` directory with Git LFS:
+    ```bash
+    git lfs track "Cat_Dog_data/*"
+    ```
 
-## Install the required packages:
+7. Add and commit the `.gitattributes` file:
+    ```bash
+    git add .gitattributes
+    git commit -m "Configure Git LFS for image files"
+    ```
 
-bash'''
-pip install -r requirements.txt
+8. Add and commit the `Cat_Dog_data` directory:
+    ```bash
+    git add Cat_Dog_data
+    git commit -m "Add cat and dog image data"
+    ```
 
+9. Push changes to your remote repository:
+    ```bash
+    git push origin main
+    ```
 
-Usage:
+#### Usage
 
-    Prepare your dataset:
-        Ensure your dataset directory structure is as follows:
+1. Prepare your dataset:
+    - Ensure your dataset directory structure is as follows:
+      ```
+      Cat_Dog_data/
+      ├── train/
+      │   ├── cat/
+      │   └── dog/
+      └── test/
+          ├── cat/
+          └── dog/
+      ```
 
-        bash
-
-    Cat_Dog_data/
-    ├── train/
-    │   ├── cat/
-    │   └── dog/
-    └── test/
-        ├── cat/
-        └── dog/
-
-Run the training script:
-
-bash
-
-python main.py
-
-Follow the on-screen prompts to proceed with training and saving the model.
+2. Run the training script:
+    ```bash
+    python main.py
+    ```
