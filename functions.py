@@ -83,6 +83,21 @@ def image_train_generator(batch_size, train_dir, img_shape):
 
 
 def image_validation_generator(batch_size, val_dir, img_shape):
+    """
+    Generate batches of validation images for evaluating a machine learning model.
+
+    Args:
+        batch_size (int): Number of images per batch.
+        val_dir (str): Directory path containing validation images.
+        img_shape (int): Size to which images are resized (images will be square with dimensions img_shape x img_shape).
+
+    Returns:
+        DirectoryIterator: A DirectoryIterator yielding batches of validation images and their labels (binary).
+
+    Example usage:
+        val_data_gen = image_validation_generator(batch_size=32, val_dir='path/to/validation', img_shape=150)
+        model.evaluate(val_data_gen)
+    """
     # shaping images for validation
     image_gen_val = ImageDataGenerator(rescale=1./255)
 

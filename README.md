@@ -33,33 +33,11 @@ This project aims to classify images of cats and dogs using a Convolutional Neur
       brew install git-lfs
       ```
     - Windows: Download and Install [Git LFS for Windows](https://git-lfs.github.com/).
-    - Linux: Follow the Instructions [Git LFS:n dokumentaatiossa](https://github.com/git-lfs/git-lfs/wiki/Installation).
+    - Linux: Follow the Instructions [Git LFS:n dokumentation](https://github.com/git-lfs/git-lfs/wiki/Installation).
 
 5. Initialize Git LFS in your project:
     ```bash
     git lfs install
-    ```
-
-6. Track the `Cat_Dog_data` directory with Git LFS:
-    ```bash
-    git lfs track "Cat_Dog_data/*"
-    ```
-
-7. Add and commit the `.gitattributes` file:
-    ```bash
-    git add .gitattributes
-    git commit -m "Configure Git LFS for image files"
-    ```
-
-8. Add and commit the `Cat_Dog_data` directory:
-    ```bash
-    git add Cat_Dog_data
-    git commit -m "Add cat and dog image data"
-    ```
-
-9. Push changes to your remote repository:
-    ```bash
-    git push origin main
     ```
 
 #### Usage
