@@ -19,21 +19,11 @@ def main():
 
     val_data_gen = image_validation_generator(batch_size, val_dir, img_shape)
 
-    # Convert to tf.data.Dataset
-    train_dataset = tf.data.Dataset.from_generator(lambda: train_data_gen, output_signature=(
-        tf.TensorSpec(shape=(None, img_shape, img_shape, 3), dtype=tf.float32),
-        tf.TensorSpec(shape=(None,), dtype=tf.float32)))
-    train_dataset = train_dataset.repeat().prefetch(tf.data.AUTOTUNE)
-
-    val_dataset = tf.data.Dataset.from_generator(lambda: val_data_gen, output_signature=(
-        tf.TensorSpec(shape=(None, img_shape, img_shape, 3), dtype=tf.float32),
-        tf.TensorSpec(shape=(None,), dtype=tf.float32)))
-    val_dataset = val_dataset.repeat().prefetch(tf.data.AUTOTUNE)
+    train_dataset, val_dataset = dataset_generator(train_data_gen, val_data_gen, img_shape)
 
     model = model_compiler_summary()
 
     print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
-
     # last checkout before training
     u_input = input("Everything looks good? (Y/N)")
     if u_input in ["Y", "y", "Yes", "yes"]:

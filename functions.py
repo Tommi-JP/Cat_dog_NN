@@ -63,6 +63,21 @@ def image_validation_generator(batch_size, val_dir, img_shape):
                                                      class_mode='binary')
     
     return val_data_gen
+
+
+def dataset_generator(train_data_gen, val_data_gen, img_shape):
+    # Convert to tf.data.Dataset
+    train_dataset = tf.data.Dataset.from_generator(lambda: train_data_gen, output_signature=(
+        tf.TensorSpec(shape=(None, img_shape, img_shape, 3), dtype=tf.float32),
+        tf.TensorSpec(shape=(None,), dtype=tf.float32)))
+    train_dataset = train_dataset.repeat().prefetch(tf.data.AUTOTUNE)
+
+    val_dataset = tf.data.Dataset.from_generator(lambda: val_data_gen, output_signature=(
+        tf.TensorSpec(shape=(None, img_shape, img_shape, 3), dtype=tf.float32),
+        tf.TensorSpec(shape=(None,), dtype=tf.float32)))
+    val_dataset = val_dataset.repeat().prefetch(tf.data.AUTOTUNE)
+
+    return train_dataset, val_dataset
     
 
 
