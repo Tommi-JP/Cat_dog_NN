@@ -6,6 +6,22 @@ import matplotlib.pyplot as plt
 import sys
 
 def directory_join(image_dir):
+    """
+    Create directory paths for training and validation sets for 'cat' and 'dog' images within the given image directory.
+
+    Args:
+        image_dir (str): Directory path containing subdirectories 'train' and 'test' with 'cat' and 'dog' images.
+
+    Returns:
+        tuple: A tuple containing:
+            - train_dir (str): Directory path for training images.
+            - val_dir (str): Directory path for validation images.
+            - total_train (int): Total number of training images.
+            - total_val (int): Total number of validation images.
+
+    Prints:
+        Information about the number of images in each category (cats and dogs) for training and validation sets.
+    """
     train_dir = os.path.join(image_dir, "train")
     val_dir = os.path.join(image_dir, "test")
 
@@ -32,6 +48,17 @@ def directory_join(image_dir):
 
 
 def image_train_generator(batch_size, train_dir, img_shape):
+    """
+    Generate batches of augmented images for training a machine learning model.
+
+    Args:
+        batch_size (int): Number of images per batch.
+        train_dir (str): Directory path containing training images.
+        img_shape (int): Size to which images are resized (images will be square with dimensions img_shape x img_shape).
+
+    Returns:
+        DirectoryIterator: A DirectoryIterator yielding batches of augmented images and their labels (binary).
+    """
         # shaping images for training, can be changed if necessary
     image_gen_train = ImageDataGenerator(
         rescale=1./255, # rescales the pixel values of the images by dividing them by 255, which normalizes the pixel values to be between 0 and 1
@@ -52,6 +79,8 @@ def image_train_generator(batch_size, train_dir, img_shape):
                                                          class_mode='binary')
     
     return train_data_gen
+
+
 
 def image_validation_generator(batch_size, val_dir, img_shape):
     # shaping images for validation
