@@ -7,10 +7,10 @@ Installation
 
     Clone the repository:
 
-    bash
-
+"""
 git clone https://github.com/yourusername/cat-dog-classification.git
 cd cat-dog-classification
+"""
 
 Create a virtual environment and activate it:
 
