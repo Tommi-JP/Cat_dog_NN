@@ -40,6 +40,11 @@ This project aims to classify images of cats and dogs using a Convolutional Neur
     git lfs install
     ```
 
+6. Download dataset:
+    '''bash
+    git lfs pull
+    '''
+
 #### Usage
 
 1. Prepare your dataset:
