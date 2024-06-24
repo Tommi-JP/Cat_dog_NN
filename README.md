@@ -5,27 +5,27 @@ This project aims to classify images of cats and dogs using a Convolutional Neur
 
 Installation
 
-    Clone the repository:
+### Clone the repository:
 
-"""
-git clone https://github.com/yourusername/cat-dog-classification.git
+'''
+git c'''lone https://github.com/yourusername/cat-dog-classification.git
 cd cat-dog-classification
-"""
+'''
 
-Create a virtual environment and activate it:
+### Create a virtual environment and activate it:
 
-bash
-
+'''
 python -m venv venv
 source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+'''
 
-Install the required packages:
+### Install the required packages:
 
-bash
+'''
+pip install -r requirements.txt
+'''
 
-    pip install -r requirements.txt
-
-Usage
+Usage:
 
     Prepare your dataset:
         Ensure your dataset directory structure is as follows:
