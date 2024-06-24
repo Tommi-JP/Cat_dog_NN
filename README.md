@@ -6,9 +6,6 @@ This project aims to classify images of cats and dogs using a Convolutional Neur
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Functions](#functions)
-- [License](#license)
 
 #### Installation
 
@@ -41,9 +38,9 @@ This project aims to classify images of cats and dogs using a Convolutional Neur
     ```
 
 6. Download dataset:
-    '''bash
+    ```bash
     git lfs pull
-    '''
+    ```
 
 #### Usage
 

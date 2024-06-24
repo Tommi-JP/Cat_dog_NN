@@ -93,10 +93,6 @@ def image_validation_generator(batch_size, val_dir, img_shape):
 
     Returns:
         DirectoryIterator: A DirectoryIterator yielding batches of validation images and their labels (binary).
-
-    Example usage:
-        val_data_gen = image_validation_generator(batch_size=32, val_dir='path/to/validation', img_shape=150)
-        model.evaluate(val_data_gen)
     """
     # shaping images for validation
     image_gen_val = ImageDataGenerator(rescale=1./255)
@@ -110,6 +106,24 @@ def image_validation_generator(batch_size, val_dir, img_shape):
 
 
 def dataset_generator(train_data_gen, val_data_gen, img_shape):
+    """
+    Converts data generators into TensorFlow Dataset objects.
+
+    Args:
+    - train_data_gen (generator function): Generator function for training data.
+    - val_data_gen (generator function): Generator function for validation data.
+    - img_shape (int): Size of the images in the dataset (assumes square images).
+
+    Returns:
+    - train_dataset (tf.data.Dataset): TensorFlow Dataset object for training data,
+      containing batches of images and corresponding labels.
+    - val_dataset (tf.data.Dataset): TensorFlow Dataset object for validation data,
+      containing batches of images and corresponding labels.
+
+    Each dataset is repeated indefinitely (`train_dataset.repeat()`, `val_dataset.repeat()`)
+    to allow multiple epochs during training. They are also prefetched (`prefetch(tf.data.AUTOTUNE)`)
+    to improve performance by overlapping data preprocessing and model execution.
+    """
     # Convert to tf.data.Dataset
     train_dataset = tf.data.Dataset.from_generator(lambda: train_data_gen, output_signature=(
         tf.TensorSpec(shape=(None, img_shape, img_shape, 3), dtype=tf.float32),
