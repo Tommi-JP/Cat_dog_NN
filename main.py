@@ -13,35 +13,11 @@ def main():
 
     train_dir, val_dir, total_train, total_val = directory_join(image_dir)
 
-    # shaping images for training, can be changed if necessary
-    image_gen_train = ImageDataGenerator(
-        rescale=1./255, # rescales the pixel values of the images by dividing them by 255, which normalizes the pixel values to be between 0 and 1
-        rotation_range=30, # randomly rotates the images
-        width_shift_range=0.2, # randomly shifts the images horizontally
-        height_shift_range=0.2, # and same vertically
-        shear_range=0.2, # applies a shearing transformation with a shear intensity
-        zoom_range=0.2, # randomly zooms into the images
-        horizontal_flip=True, # randomly flips the images horizontally
-        fill_mode='nearest' # determines how newly created pixels are filled in when the image is transformed. 'nearest' means that the nearest pixel value will be used to fill in the gaps.
-    )
-
-    # training data generator
-    train_data_gen = image_gen_train.flow_from_directory(batch_size=batch_size,
-                                                         directory=train_dir,
-                                                         shuffle=True,
-                                                         target_size=(img_shape, img_shape),
-                                                         class_mode='binary')
-
+    train_data_gen = image_train_generator(batch_size, train_dir, img_shape)
     augmented_images = [train_data_gen[0][0][0] for i in range(5)]
     show_image(augmented_images)
 
-    # shaping images for validation
-    image_gen_val = ImageDataGenerator(rescale=1./255)
-
-    val_data_gen = image_gen_val.flow_from_directory(batch_size=batch_size,
-                                                     directory=val_dir,
-                                                     target_size=(img_shape, img_shape),
-                                                     class_mode='binary')
+    val_data_gen = image_validation_generator(batch_size, val_dir, img_shape)
 
     # Convert to tf.data.Dataset
     train_dataset = tf.data.Dataset.from_generator(lambda: train_data_gen, output_signature=(
