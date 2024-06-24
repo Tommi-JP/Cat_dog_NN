@@ -1,10 +1,9 @@
 from functions import *
 
-
 def main():
-    # the directory where the pictures are, can be changed if necessary
+    # the directory where the pictures are
     image_dir = "../Cat_Dog_data"
-    # batch size and image shape variables, can be changed if necessary
+    # batch size and image shape variables
     batch_size = 32
     img_shape = 224
     # epochs
@@ -12,26 +11,7 @@ def main():
     # save outputfile
     file_path_output = "output.txt"
 
-    train_dir = os.path.join(image_dir, "train")
-    val_dir = os.path.join(image_dir, "test")
-
-    cats_train_dir = os.path.join(train_dir, "cat")
-    dogs_train_dir = os.path.join(train_dir, "dog")
-
-    cats_val_dir = os.path.join(val_dir, "cat")
-    dogs_val_dir = os.path.join(val_dir, "dog")
-
-    total_train = len(os.listdir(cats_train_dir)) + len(os.listdir(dogs_train_dir))
-    total_val = len(os.listdir(cats_val_dir)) + len(os.listdir(dogs_val_dir))
-
-    print(f"Total training images cats: {len(os.listdir(cats_train_dir))}")
-    print(f"Total training images dogs: {len(os.listdir(dogs_train_dir))}")
-
-    print(f"Total validation images cats: {len(os.listdir(cats_val_dir))}")
-    print(f"Total validation images dogs: {len(os.listdir(dogs_val_dir))}")
-
-    print(f"Total training images: {total_train}")
-    print(f"Total validation images: {total_val}")
+    train_dir, val_dir, total_train, total_val = directory_join(image_dir)
 
     # shaping images for training, can be changed if necessary
     image_gen_train = ImageDataGenerator(
@@ -63,11 +43,22 @@ def main():
                                                      target_size=(img_shape, img_shape),
                                                      class_mode='binary')
 
+    # Convert to tf.data.Dataset
+    train_dataset = tf.data.Dataset.from_generator(lambda: train_data_gen, output_signature=(
+        tf.TensorSpec(shape=(None, img_shape, img_shape, 3), dtype=tf.float32),
+        tf.TensorSpec(shape=(None,), dtype=tf.float32)))
+    train_dataset = train_dataset.repeat().prefetch(tf.data.AUTOTUNE)
+
+    val_dataset = tf.data.Dataset.from_generator(lambda: val_data_gen, output_signature=(
+        tf.TensorSpec(shape=(None, img_shape, img_shape, 3), dtype=tf.float32),
+        tf.TensorSpec(shape=(None,), dtype=tf.float32)))
+    val_dataset = val_dataset.repeat().prefetch(tf.data.AUTOTUNE)
+
     model = model_compiler_summary()
 
     print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
 
-    # last cherckout before training
+    # last checkout before training
     u_input = input("Everything looks good? (Y/N)")
     if u_input in ["Y", "y", "Yes", "yes"]:
         print("Training started!")
@@ -78,10 +69,10 @@ def main():
 
     with tf.device('/GPU:0' if tf.config.list_physical_devices('GPU') else '/CPU:0'):
         history = model.fit(
-            train_data_gen,
+            train_dataset,
             steps_per_epoch=int(np.ceil(total_train / float(batch_size))),
             epochs=epochs,
-            validation_data=val_data_gen,
+            validation_data=val_dataset,
             validation_steps=int(np.ceil(total_val / float(batch_size)))
         )
       

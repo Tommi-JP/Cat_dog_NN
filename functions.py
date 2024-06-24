@@ -5,6 +5,30 @@ import numpy as np
 import matplotlib.pyplot as plt
 import sys
 
+def directory_join(image_dir):
+    train_dir = os.path.join(image_dir, "train")
+    val_dir = os.path.join(image_dir, "test")
+
+    cats_train_dir = os.path.join(train_dir, "cat")
+    dogs_train_dir = os.path.join(train_dir, "dog")
+
+    cats_val_dir = os.path.join(val_dir, "cat")
+    dogs_val_dir = os.path.join(val_dir, "dog")
+
+    total_train = len(os.listdir(cats_train_dir)) + len(os.listdir(dogs_train_dir))
+    total_val = len(os.listdir(cats_val_dir)) + len(os.listdir(dogs_val_dir))
+
+    print(f"Total training images cats: {len(os.listdir(cats_train_dir))}")
+    print(f"Total training images dogs: {len(os.listdir(dogs_train_dir))}")
+
+    print(f"Total validation images cats: {len(os.listdir(cats_val_dir))}")
+    print(f"Total validation images dogs: {len(os.listdir(dogs_val_dir))}")
+
+    print(f"Total training images: {total_train}")
+    print(f"Total validation images: {total_val}")
+
+    return train_dir, val_dir, total_train, total_val
+
 def show_image(images_arr):
     """
     Display a set of images based on user input.
