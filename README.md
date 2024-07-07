@@ -68,6 +68,4 @@ This project aims to classify images of cats and dogs using a Convolutional Neur
     ```
 
 4. Stopping the use of Streamlit:
-    ```bash
     Before closing the browser, terminate the program in your IDEs terminal with ctrl+c. After this, you can close the browser. If you you already closed the browser, you can go to http://localhost:8501 and try again.
-    ``` 
