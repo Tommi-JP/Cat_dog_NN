@@ -47,14 +47,14 @@ This project aims to classify images of cats and dogs using a Convolutional Neur
 1. Prepare your dataset:
     - Ensure your dataset directory structure is as follows:
       ```
-    Cat_dog_NN/
-    ├── Cat_Dog_data/
-    │   ├── test/
-    │   │   ├── cat/
-    │   │   └── dog/
-    │   ├── train/
-    │   │   ├── cat/
-    │   │   └── dog/
+        Cat_dog_NN/
+        ├── Cat_Dog_data/
+        │   ├── test/
+        │   │   ├── cat/
+        │   │   └── dog/
+        │   ├── train/
+        │   │   ├── cat/
+        │   │   └── dog/
       ```
 
 2. Run the training script:
