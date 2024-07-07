@@ -1,5 +1,6 @@
-tensorflow==2.9.0
-numpy==1.21.0
-matplotlib==3.4.2
-keras-preprocessing==1.1.2
-scipy
+streamlit
+Pillow
+numpy
+tensorflow
+keras-preprocessing
+matplotlib

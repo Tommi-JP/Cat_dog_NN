@@ -1,7 +1,6 @@
 import os
 import tensorflow as tf
 from keras_preprocessing.image import ImageDataGenerator
-import numpy as np
 import matplotlib.pyplot as plt
 import sys
 

@@ -1,6 +1,6 @@
 ### Project Title: Cat and Dog Image Classification
 
-This project aims to classify images of cats and dogs using a Convolutional Neural Network (CNN) built with TensorFlow and Keras. The model is trained on a dataset of cat and dog images, with data augmentation applied to enhance the training process.
+This project aims to classify images of cats and dogs using a Convolutional Neural Network (CNN) built with TensorFlow and Keras. The model is trained on a dataset of cat and dog images, with data augmentation applied to enhance the training process. This also uses the Streamlit library, which allows the model to be tested on the localhost. The program initially asks the user whether to skip training and proceed directly to testing if the .h5 file is already in the root directory
 
 #### Table of Contents
 
@@ -47,16 +47,22 @@ This project aims to classify images of cats and dogs using a Convolutional Neur
 1. Prepare your dataset:
     - Ensure your dataset directory structure is as follows:
       ```
-      Cat_Dog_data/
-      ├── train/
-      │   ├── cat/
-      │   └── dog/
-      └── test/
-          ├── cat/
-          └── dog/
+    Cat_dog_NN/
+    ├── Cat_Dog_data/
+    │   ├── test/
+    │   │   ├── cat/
+    │   │   └── dog/
+    │   ├── train/
+    │   │   ├── cat/
+    │   │   └── dog/
       ```
 
 2. Run the training script:
     ```bash
     python main.py
+    ```
+
+3. Run the training script:
+    ```bash
+    Follow the program instructions.
     ```
