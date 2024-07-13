@@ -5,7 +5,7 @@ import tensorflow as tf
 
 
 # load model.h5
-model = tf.keras.models.load_model('./cat_dog.h5')
+model = tf.keras.models.load_model('./pre_trained model/cat_dog.h5')
 
 st.title("Cat or Dog?")
 
